@@ -15,6 +15,22 @@
       "category": "Alimentação",
       "price": 35,
       "createdAt": "2022-08-30T20:00:44.505Z"
+    },
+    {
+      "description": "Pizza",
+      "price": 75,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2022-09-22T22:16:13.906Z",
+      "id": 3
+    },
+    {
+      "description": "Coca cola",
+      "price": 8,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2022-09-22T22:29:51.920Z",
+      "id": 4
     }
   ]
 }
