@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { Overlay, Content, CloseButton, TransactionType, TransactionTypeButton } from './styles'
 import { X, ArrowCircleUp, ArrowCircleDown } from 'phosphor-react'
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 const newTransactionFormSchema = z.object({
@@ -16,6 +16,7 @@ type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema>
 export function NewTransactionModal() {
 
   const { 
+    control,
     register, 
     handleSubmit,
     formState: { isSubmitting } 
@@ -24,7 +25,7 @@ export function NewTransactionModal() {
   })
 
   function handleCreateNewTransaction(data: NewTransactionFormInputs) {
-
+    console.log(data)
   }
 
   return (
@@ -55,17 +56,25 @@ export function NewTransactionModal() {
             required 
             {...register('category')}
           />
-
-          <TransactionType>
-            <TransactionTypeButton value="income" variant="income">
-              <ArrowCircleUp />
-              Entrada
-            </TransactionTypeButton>
-            <TransactionTypeButton value="outcome">
-              <ArrowCircleDown />
-              Saída
-            </TransactionTypeButton>
-          </TransactionType>
+          <Controller 
+            control={control}
+            name="type"
+            render={({ field }) => {
+              return (
+                <TransactionType onValueChange={field.onChange} value={field.value}>
+                  <TransactionTypeButton value="income" variant="income">
+                    <ArrowCircleUp />
+                    Entrada
+                  </TransactionTypeButton>
+                  <TransactionTypeButton value="outcome">
+                    <ArrowCircleDown />
+                    Saída
+                  </TransactionTypeButton>
+                </TransactionType>
+              )
+            }}
+          />
+          
 
           <button type="submit" disabled={isSubmitting}>Cadastrar</button>
         </form>
